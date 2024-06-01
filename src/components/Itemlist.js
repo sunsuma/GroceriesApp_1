@@ -1,5 +1,6 @@
 export const imageData = [
   {
+    id: 1,
     "Top_Categories": [
         { id: 1, name: "Groceries", uri: require("../images/Groceries.png") },
         { id: 2, name: "Vegetables", uri: require("../images/vegetables.png") },
@@ -8,6 +9,7 @@ export const imageData = [
     ]
   },
 {
+    id: 2,
     "Top Products":[
         { id: 1, name: "Fortune rice",price:'$3/kg', uri: require("../images/fortune_rice.png") },
         { id: 2, name: "Fresh Avocado",price:'$3/kg', uri: require("../images/Avocado.png") },
@@ -16,6 +18,7 @@ export const imageData = [
     ]
 },
 {
+    id: 3,
     "Deals of the week":[
         { id: 1, name: "Soft drinks",off:'Upto 40% off', uri: require("../images/soft_drinks.png") },
         { id: 2, name: "Tea",off:'Upto 40% off', uri: require("../images/tea.png") },
@@ -24,6 +27,7 @@ export const imageData = [
     ]
 },
 {
+    id: 4,
     "Featured Items":[
         { id: 1, name: "Granola \npremium Almond",price:'$22.00',quantity:'1kg', uri: require("../images/granola.png") },
         { id: 2, name: "SFT kiwi slice \n(Dried)",price:'$4.00',quantity:'3pcs.', uri: require("../images/sft.png") },
@@ -32,6 +36,7 @@ export const imageData = [
     ]
 },
 {
+    id: 5,
     "Groceries":[
         { id: 1, name: "Jaggery Powder",price:'$3',quantity:'500 g', uri: require("../images/jaggery.png") },
         { id: 2, name: "TATA Arhar Dal",price:'$4',quantity:'1kg', uri: require("../images/masoor.png") },
@@ -40,6 +45,7 @@ export const imageData = [
     ]
 },
 {
+    id: 6,
     "Vegetables":[
         { id: 1, name: "Tomato",price:'$2',quantity:'1kg', uri: require("../images/tomatos.png") },
         { id: 2, name: "Potato",price:'$1',quantity:'1kg', uri: require("../images/potato.png") },
@@ -48,14 +54,21 @@ export const imageData = [
     ]
 },
 {
+    id: 7,
     "Fruits":[
-        { id: 1, name: "Tomato",price:'$4',quantity:'1kg', uri: require("../images/Strawberry.png") },
-        { id: 2, name: "Potato",price:'$2',quantity:'1kg', uri: require("../images/banana.png") },
-        { id: 4, name: "Lemon",price:'$2',quantity:'1kg', uri: require("../images/sft.png") },
-        { id: 3, name: "Onion",price:'$4',quantity:'1kg', uri: require("../images/orange.png") },
+        { id: 1, name: "Strawberry",price:'$4',quantity:'1kg', uri: require("../images/Strawberry.png") },
+        { id: 2, name: "Banana",price:'$2',quantity:'1kg', uri: require("../images/banana.png") },
+        { id: 3, name: "Kiwifruit",price:'$2',quantity:'1kg', uri: require("../images/sft.png") },
+        { id: 4, name: "Orange",price:'$4',quantity:'1kg', uri: require("../images/orange.png") },
+        { id: 5, name: "Grapes",price:'$4',quantity:'1kg', uri: require("../images/Fruits/Grapes.png") },
+        { id: 6, name: "Watermelon",price:'$2',quantity:'1kg', uri: require("../images/Fruits/melon.png") },
+        { id: 7, name: "Guava",price:'$2',quantity:'1kg', uri: require("../images/Fruits/guava.png") },
+        { id: 8, name: "Avocado",price:'$2',quantity:'2pcs', uri: require("../images/Fruits/Avocado.png") },
+        
     ]
 },
-{
+{   
+    id: 8,
     "Dairy":[
         { id: 1, name: "A2MATE milk",price:'$2',quantity:'0.5 ltr', uri: require("../images/milk.png") },
         { id: 2, name: "Amul Butter",price:'$2',quantity:'0.5 ltr', uri: require("../images/sofit.png") },

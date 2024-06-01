@@ -6,40 +6,87 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import { imageData } from "../components/Itemlist";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 
 const Explore = () => {
   const navigation = useNavigation();
+  const [showShadow, setShowShadow] = useState(false);
+  const scrollViewRef = useRef(null);
+
+  const handleSeeAll = (category, itemId) => {
+    navigation.navigate("ItemList", { category, itemId });
+  };
+
+  const handleScroll = (event) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    const threshold = 10; // Adjust this value as needed
+    if (offsetY > threshold && !showShadow) {
+      setShowShadow(true);
+    } else if (offsetY <= threshold && showShadow) {
+      setShowShadow(false);
+    }
+  };
+
+  // const handleScroll = (event) => {
+  //   const contentHeight = event.nativeEvent.contentSize.height;
+  //   const visibleHeight = event.nativeEvent.layoutMeasurement.height;
+  //   const offsetY = event.nativeEvent.contentOffset.y;
+  //   const bottomThreshold = 100; // Adjust this value as needed
+
+  //   if (contentHeight - visibleHeight - offsetY < bottomThreshold) {
+  //     setShowShadow(true);
+  //   } else {
+  //     setShowShadow(false);
+  //   }
+  // };
+
   return (
     <SafeAreaView>
       <StatusBar barStyle="light-content" />
-
-      <View style={styles.header}>
-        <Icon name="chevron-back-outline" size={30} onPress={() => navigation.goBack()}/>
-        <Text
-          style={{
-            ...styles.headerText,
-            fontSize: 22,
-            fontWeight: "700",
-            marginLeft: 40,
-            marginBottom:10,
-          }}
-        >
-          Explore
-        </Text>
+      <View style={[styles.header, showShadow && styles.headerShadow]}>
+        <View style={styles.headerContent}>
+          <Icon
+            name="chevron-back-outline"
+            size={30}
+            onPress={() => navigation.goBack()}
+          />
+          <Text
+            style={{
+              ...styles.headerText,
+              fontSize: 22,
+              fontWeight: "700",
+              marginLeft: 40,
+              marginBottom: 10,
+            }}
+          >
+            Explore
+          </Text>
+        </View>
       </View>
 
-      <ScrollView className="bg-white">
+      <ScrollView
+      ref={scrollViewRef}
+        // className="bg-white"
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
         <View style={styles.container}>
           <View style={styles.containerContent}>
             <Text style={styles.containerText}>Groceries</Text>
-            <Text style={styles.containerText2}>See All</Text>
+            <Text
+              style={styles.containerText2}
+              onPress={() =>
+                handleSeeAll("Groceries", imageData[4]["Groceries"][0].id)
+              }
+            >
+              See All
+            </Text>
           </View>
 
           <FlatList
@@ -51,9 +98,13 @@ const Explore = () => {
               <View style={styles.card}>
                 <Image
                   source={item.uri}
-                  style={{ width: 100, height: 100, margin: 2 }}
+                  style={{
+                    width: 100,
+                    height: 80,
+                    margin: 10,
+                    objectFit: "contain",
+                  }}
                 />
-
                 <View>
                   <Text style={styles.cardText1}>{item.name}</Text>
                   <Text style={styles.cardText2}>{item.quantity}</Text>
@@ -68,7 +119,14 @@ const Explore = () => {
 
           <View style={styles.containerContent}>
             <Text style={styles.containerText}>Vegetables</Text>
-            <Text style={styles.containerText2}>See All</Text>
+            <Text
+              style={styles.containerText2}
+              onPress={() =>
+                handleSeeAll("Vegetables", imageData[5]["Vegetables"][0].id)
+              }
+            >
+              See All
+            </Text>
           </View>
 
           <FlatList
@@ -77,33 +135,42 @@ const Explore = () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <>
-                <View style={styles.card}>
-                  <Image
-                    source={item.uri}
-                    style={{ width: 80, height: 63, margin: 10 }}
-                  />
-
-                  <View style={{ width: "90%", bottom: 2 }}>
-                    <Text style={styles.cardText1}>{item.name}</Text>
-                    <Text style={styles.cardText1}>{item.quantity}</Text>
-                    <Text style={styles.cardText1}>{item.price}</Text>
-                    <View style={styles.iconContainer}>
-                      <Text style={styles.icon}>+</Text>
-                    </View>
+              <View style={styles.card}>
+                <Image
+                  source={item.uri}
+                  style={{
+                    width: 100,
+                    height: 80,
+                    margin: 10,
+                    objectFit: "contain",
+                  }}
+                />
+                <View style={{ width: "90%", bottom: 2 }}>
+                  <Text style={styles.cardText1}>{item.name}</Text>
+                  <Text style={styles.cardText1}>{item.quantity}</Text>
+                  <Text style={styles.cardText1}>{item.price}</Text>
+                  <View style={styles.iconContainer}>
+                    <Text style={styles.icon}>+</Text>
                   </View>
                 </View>
-              </>
+              </View>
             )}
           />
 
           <View style={styles.containerContent}>
             <Text style={styles.containerText}>Fruits</Text>
-            <Text style={styles.containerText2} onPress={()=>navigation.navigate('Details')}>See All</Text>
+            <Text
+              style={styles.containerText2}
+              onPress={() =>
+                handleSeeAll("Fruits", imageData[6]["Fruits"][0].id)
+              }
+            >
+              See All
+            </Text>
           </View>
 
           <FlatList
-            data={imageData[6]["Fruits"]}
+            data={imageData[6]["Fruits"].slice(0, 4)}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
@@ -111,9 +178,13 @@ const Explore = () => {
               <View style={styles.card}>
                 <Image
                   source={item.uri}
-                  style={{ width: 87, height: 61, margin: 10 }}
+                  style={{
+                    width: 100,
+                    height: 80,
+                    margin: 10,
+                    objectFit: "contain",
+                  }}
                 />
-
                 <View style={{ width: "90%", bottom: 2 }}>
                   <Text style={styles.cardText1}>{item.name}</Text>
                   <Text style={styles.cardText2}>{item.quantity}</Text>
@@ -128,7 +199,12 @@ const Explore = () => {
 
           <View style={styles.containerContent}>
             <Text style={styles.containerText}>Dairy Products</Text>
-            <Text style={styles.containerText2}>See All</Text>
+            <Text
+              style={styles.containerText2}
+              onPress={() => handleSeeAll("Dairy", imageData[7]["Dairy"][0].id)}
+            >
+              See All
+            </Text>
           </View>
 
           <FlatList
@@ -137,13 +213,17 @@ const Explore = () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <View style={{...styles.card,marginBottom:90}}>
+              <View style={{ ...styles.card, marginBottom: 90 }}>
                 <Image
                   source={item.uri}
-                  style={{ width: 80, height: 96, margin: 10 }}
+                  style={{
+                    width: 100,
+                    height: 80,
+                    margin: 10,
+                    objectFit: "contain",
+                  }}
                 />
-
-                <View style={{width:100}}>
+                <View style={{ width: 100 }}>
                   <Text style={styles.cardText1}>{item.name}</Text>
                   <Text style={styles.cardText2}>{item.quantity}</Text>
                   <Text style={styles.cardText3}>{item.price}</Text>
@@ -163,21 +243,30 @@ const Explore = () => {
 export default Explore;
 
 const styles = StyleSheet.create({
-  header: {
-    marginTop:30,
+  header:{
+    width:'100%',
+    // backgroundColor: "red",
+  },
+
+  headerContent: {
+    marginTop: 20,
     width: 220,
-    // backgroundColor:'#55AB60',
     flexDirection: "row",
     justifyContent: "space-between",
     left: 16,
+    
   },
+  headerShadow: {
+    borderBottomWidth: 1,
+    borderBottomColor: "grey",
+  },
+
   headerText: {
     fontSize: 20,
   },
   container: {
     left: 16,
     width: 365,
-    // backgroundColor:'red'
   },
   containerContent: {
     marginTop: 20,
@@ -194,15 +283,17 @@ const styles = StyleSheet.create({
     color: "#55AB60",
   },
   card: {
-    marginTop:10,
+    marginTop: 10,
     width: 120,
     height: 190,
     backgroundColor: "#F2FCF4",
+    elevation: 5,
     borderRadius: 10,
-    marginRight: 14,
+    // marginRight: 14,
+    // marginBottom:5,
+    margin: 8,
     justifyContent: "center",
     alignItems: "center",
-    // paddingTop: 12,
   },
   cardText1: {
     fontSize: 14,
