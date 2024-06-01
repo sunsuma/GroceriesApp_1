@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, Button } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -77,9 +77,11 @@ const Details = () => {
                   <Text style={styles.text2}>Buy Once</Text>
                 </View>
               </View>
+
             </View>
           ))}
         </View>
+              <Button title="Click" onPress={() => navigation.navigate('Details')}>Click</Button>
         </View>
       </ScrollView>
     </SafeAreaView>
