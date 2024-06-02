@@ -15,7 +15,6 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { imageData } from "../components/Itemlist";
 import Icon from "react-native-vector-icons/Ionicons";
 
-
 const Detail = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -24,7 +23,7 @@ const Detail = () => {
   const scrollViewRef = useRef(null);
 
   const handlePress = (item) => {
-    navigation.navigate('Details', { category, itemId: item.id });
+    navigation.navigate("Details", { category, itemId: item.id });
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
     }
@@ -35,103 +34,99 @@ const Detail = () => {
 
   return (
     <SafeAreaView>
-    <StatusBar barStyle="light-content" hidden/>
-      <ScrollView ref={scrollViewRef}>
-        <View>
-          <View style={styles.headerContent}>
-            <View style={styles.IconContainer}>
-              <Icon
-                name="chevron-back-outline"
-                size={30}
-                onPress={() => navigation.goBack()}
-              />
-              <Text style={styles.text}>Details</Text>
-            </View>
-          </View>
-
-          <View style={styles.ImageContainer}>
-            <Image source={selectedItem.uri} style={styles.Image} />
-          </View>
-          <View style={styles.containerContent}>
-            <Text style={styles.ContentText}>{selectedItem.name}</Text>
-            <View style={styles.IncrementIcon}>
-              <Icon
-                name="remove-circle-outline"
-                size={20}
-                style={styles.minus}
-              />
-              <Text style={styles.increment}>1</Text>
-              <Icon name="add-circle" size={20} style={styles.plus} />
-            </View>
-          </View>
-          <View style={styles.containerInsideContent}>
-            <Text style={styles.text2}>Special price</Text>
-            <View style={styles.ContentInside}>
-              <Text style={styles.ContentText}>{selectedItem.price}</Text>
-              <Text style={{ ...styles.ContentText, color: "#55AB60" }}>
-                (42% off)
-              </Text>
-            </View>
-
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.ContentText}>Description</Text>
-              <Text style={styles.descriptionText}>
-                Green apples have less sugar and carbs, and more fiber, protein,
-                potassium, iron, and vitamin K, taking the lead as a healthier
-                variety, although the differences are ever so slight.
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.btn}>
-            <TouchableOpacity>
-              <Text
-                style={{
-                  ...styles.btntext,
-                  backgroundColor: "#55AB60",
-                  color: "#fff",
-                }}
-              >
-                Subscribe
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-              <Text
-                style={{
-                  ...styles.btntext,
-                  borderWidth: 1,
-                  borderColor: "#55AB60",
-                }}
-              >
-                Buy Once
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.relatedItems}>
-            <Text style={{ ...styles.ContentText, marginBottom: 20 }}>
-              Related items
-            </Text>
-            <FlatList
-              data={items}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => {
-                return (
-                  <Pressable style={styles.card}
-                  onPress={() => handlePress(item)}
-                  >
-                    <Image source={item.uri} style={styles.cardImage} />
-                    <View style={styles.cardInsidecontent}>
-                      <Text style={styles.cardtext}>{item.name}</Text>
-                    </View>
-                  </Pressable>
-                );
-              }}
+      <StatusBar barStyle="light-content" backgroundColor="#55AB60" />
+      <ScrollView ref={scrollViewRef} style={{marginTop:20}}>
+        <View style={styles.headerContent}>
+          <View style={styles.IconContainer}>
+            <Icon
+              name="chevron-back-outline"
+              size={30}
+              onPress={() => navigation.goBack()}
+              color={'#fff'}
             />
+            <Text style={styles.text}>Details</Text>
           </View>
+        </View>
+
+        <View style={styles.ImageContainer}>
+          <Image source={selectedItem.uri} style={styles.Image} />
+        </View>
+        <View style={styles.containerContent}>
+          <Text style={styles.ContentText}>{selectedItem.name}</Text>
+          <View style={styles.IncrementIcon}>
+            <Icon name="remove-circle-outline" size={20} style={styles.minus} />
+            <Text style={styles.increment}>1</Text>
+            <Icon name="add-circle" size={20} style={styles.plus} />
+          </View>
+        </View>
+        <View style={styles.containerInsideContent}>
+          <Text style={styles.text2}>Special price</Text>
+          <View style={styles.ContentInside}>
+            <Text style={styles.ContentText}>{selectedItem.price}</Text>
+            <Text style={{ ...styles.ContentText, color: "#55AB60" }}>
+              (42% off)
+            </Text>
+          </View>
+
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.ContentText}>Description</Text>
+            <Text style={styles.descriptionText}>
+              Green apples have less sugar and carbs, and more fiber, protein,
+              potassium, iron, and vitamin K, taking the lead as a healthier
+              variety, although the differences are ever so slight.
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.btn}>
+          <TouchableOpacity>
+            <Text
+              style={{
+                ...styles.btntext,
+                backgroundColor: "#55AB60",
+                color: "#fff",
+              }}
+            >
+              Subscribe
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text
+              style={{
+                ...styles.btntext,
+                borderWidth: 1,
+                borderColor: "#55AB60",
+              }}
+            >
+              Buy Once
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.relatedItems}>
+          <Text style={{ ...styles.ContentText, marginBottom: 20 }}>
+            Related items
+          </Text>
+          <FlatList
+            data={items}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => {
+              return (
+                <Pressable
+                  style={styles.card}
+                  onPress={() => handlePress(item)}
+                >
+                  <Image source={item.uri} style={styles.cardImage} />
+                  <View style={styles.cardInsidecontent}>
+                    <Text style={styles.cardtext}>{item.name}</Text>
+                  </View>
+                </Pressable>
+              );
+            }}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -155,6 +150,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 22,
     fontWeight: "700",
+    color:'#fff'
   },
   ImageContainer: {
     top: 85,
