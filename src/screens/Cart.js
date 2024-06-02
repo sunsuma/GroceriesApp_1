@@ -1,28 +1,52 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
 import { ScrollView } from "react-native-gesture-handler";
-// import { TouchableHighlight, TouchableOpacity } from "react-native-web";
+import { useNavigation } from "@react-navigation/native";
+
 
 const Cart = () => {
+  const navigation = useNavigation();
+
+  const [showShadow, setShowShadow] = useState(false);
+  const scrollViewRef = useRef(null);
+
+  const handleScroll = (event) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    const threshold = 10; // Adjust this value as needed
+    if (offsetY > threshold && !showShadow) {
+      setShowShadow(true);
+    } else if (offsetY <= threshold && showShadow) {
+      setShowShadow(false);
+    }
+  };
+
   return (
     <SafeAreaView>
-      <View style={styles.header}>
-        <Icon name="chevron-back-outline" size={30} />
-        <Text
-          style={{
-            ...styles.headerText,
-            fontSize: 22,
-            fontWeight: "700",
-            marginLeft: 40,
-            marginBottom: 10,
-          }}
-        >
-          My Cart
-        </Text>
+      <View style={[showShadow && styles.headerShadow]}>
+        <View style={styles.header}>
+          <Icon name="chevron-back-outline" size={30} 
+            onPress={()=>navigation.goBack()}
+          />
+          <Text
+            style={{
+              ...styles.headerText,
+              fontSize: 22,
+              fontWeight: "700",
+              marginLeft: 40,
+              marginBottom: 10,
+            }}
+          >
+            My Cart
+          </Text>
+        </View>
       </View>
-      <ScrollView>
+      <ScrollView
+        ref={scrollViewRef}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
         <Text style={styles.containerText}>Tomorrow, 7 AM - 9 PM</Text>
 
         {/* Start Card */}
@@ -258,13 +282,16 @@ export default Cart;
 const styles = StyleSheet.create({
   header: {
     marginTop: 30,
-    width: 220,
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
     left: 16,
   },
   headerText: {
     fontSize: 20,
+  },
+  headerShadow: {
+    borderBottomWidth: 2,
+    borderBottomColor: "grey",
   },
   containerText: {
     marginTop: 10,
@@ -386,11 +413,11 @@ const styles = StyleSheet.create({
     left: 16,
   },
 
-  checkoutInside:{
+  checkoutInside: {
     width: 200,
     height: 50,
-    justifyContent:'center', 
-    alignItems:'center', 
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#55AB60",
     borderRadius: 10,
   },
@@ -399,6 +426,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     color: "#FFFFFF",
-    
   },
 });

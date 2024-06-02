@@ -7,7 +7,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { imageData } from "../components/Itemlist";
 import { StatusBar } from "expo-status-bar";
@@ -15,11 +15,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Explore from "./Explore";
 
 const Home = ({ navigation }) => {
+  const [showShadow, setShowShadow] = useState(false);
+  const scrollViewRef = useRef(null);
+
+  const handleScroll = (event) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    const threshold = 10; // Adjust this value as needed
+    if (offsetY > threshold && !showShadow) {
+      setShowShadow(true);
+    } else if (offsetY <= threshold && showShadow) {
+      setShowShadow(false);
+    }
+  };
+
   return (
     <>
       {/* <StatusBar barStyle="light" /> */}
-      <SafeAreaView>
-        <View style={{flexDirection:'row', justifyContent:'space-between',padding:10}}>
+      <SafeAreaView style={[showShadow && styles.headerShadow]}>
+        <View style={styles.header}>
           <View style={styles.imageContainer}>
             <Image
               source={{
@@ -28,10 +41,24 @@ const Home = ({ navigation }) => {
               style={styles.Image}
             />
           </View>
-            <Text style={{left:70, position:'absolute',top:10}}><Text style={{fontSize:20,fontWeight:'600'}}>David </Text>{'\n'}@gmail.com</Text>
+          <Text style={{ left: 70, position: "absolute", top: 10 }}>
+            <Text style={{ fontSize: 20, fontWeight: "600" }}>David </Text>
+            {"\n"}@gmail.com
+          </Text>
           {/* notification */}
           <Ionicons name="notifications-outline" size={30} />
-          <Text style={{color:"red",position:'absolute',right:10,top:5,fontWeight:'600', alignSelf:'center'}}>3</Text>
+          <Text
+            style={{
+              color: "red",
+              position: "absolute",
+              right: 10,
+              top: 5,
+              fontWeight: "600",
+              alignSelf: "center",
+            }}
+          >
+            3
+          </Text>
         </View>
 
         <View style={styles.searchContainer}>
@@ -43,7 +70,11 @@ const Home = ({ navigation }) => {
         </View>
       </SafeAreaView>
 
-      <ScrollView>
+      <ScrollView
+        ref={scrollViewRef}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
         <View style={styles.Imagecontainer}>
           <Image
             source={require("../../assets/advertisement.png")}
@@ -74,11 +105,9 @@ const Home = ({ navigation }) => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item, index }) => {
-                const isLastItem =
-                  index === imageData[0]["Top_Categories"].length - 1;
+              renderItem={({ item }) => {
                 return (
-                  <View style={[styles.card, isLastItem && styles.nthChild]}>
+                  <View style={styles.card}>
                     <Image source={item.uri} style={styles.cardImage} />
                     <View style={styles.cardInsidecontent}>
                       <Text style={styles.cardtext}>{item.name}</Text>
@@ -123,7 +152,7 @@ const Home = ({ navigation }) => {
         </View>
 
         {/* get 25% cashback */}
-        <View style={{ ...styles.Imagecontainer, marginTop: 60 }}>
+        <View style={{ ...styles.Imagecontainer2, marginTop: 60}}>
           <Image
             source={require("../../assets/advertisement2.png")}
             style={{ ...styles.image, height: 190 }}
@@ -238,24 +267,27 @@ const Home = ({ navigation }) => {
 export default Home;
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  // },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+  },
+
+  // off 25%
   imageContainer: {
     width: 50,
     height: 50,
     borderRadius: 100,
-    overflow: 'hidden',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    overflow: "hidden",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    elevation:5,
+    backgroundColor:'red'
   },
   Image: {
     width: 150,
     height: 100,
-    // resizeMode: '',
-    objectFit:'scale-down'
+    objectFit: "contain",
   },
   container: {
     width: 376,
@@ -285,10 +317,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 5,
   },
-  Imagecontainer: {
+  headerShadow: {
+    borderBottomWidth: 1,
+    borderBottomColor: "grey",
+  },
+  Imagecontainer:{
     width: 360,
     left: 16,
-    top: 20,
+    top: 10,
+    elevation:5,
+    borderRadius:20
+  },
+  // off-25%
+  Imagecontainer2: {
+    width: 360,
+    left: 16,
+    top: 10,
+    elevation:5,
+    borderRadius:20
   },
   image: {
     width: "100%",
@@ -314,6 +360,7 @@ const styles = StyleSheet.create({
   cardContent: {
     justifyContent: "space-between",
     flexDirection: "row",
+    
   },
   card: {
     top: 57,
@@ -322,44 +369,50 @@ const styles = StyleSheet.create({
     backgroundColor: "#F2FCF4",
     borderRadius: 10,
     marginRight: 14,
+    elevation:5,
+    margin:2
   },
 
-  nthChild: {
-    marginRight: 10,
-  },
+  // nthChild: {
+  //   marginRight: 10,
+  // },
 
   cardImage: {
-    width: "100%",
-    height: 65,
+    width: 80,
+    height: 70,
     top: -35,
+    objectFit:'contain'
   },
   card2: {
     top: 19,
     width: 170,
     height: 212,
     backgroundColor: "#F2FCF4",
-    // backgroundColor: "red",
     borderRadius: 10,
     marginRight: 14,
+    elevation:2,
+    margin:2
   },
 
   cardImage2: {
-    width: 86,
-    height: 92,
+    width: 85,
+    height: 90,
     marginTop: 24,
     alignSelf: "center",
+    objectFit:'contain'
   },
 
   cardImage3: {
-    width: 113,
-    height: 75,
+    width: 115,
+    height: 95,
     marginTop: 24,
     alignSelf: "center",
+    objectFit:'contain'
   },
 
   cardInsidecontent: {
     width: "100%",
-    height: 38,
+    height: 40,
     backgroundColor: "#55AB60",
     justifyContent: "center",
     alignItems: "center",

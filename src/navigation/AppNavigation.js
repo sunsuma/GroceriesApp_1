@@ -14,6 +14,7 @@ import Tabs from "./Tabs";
 import Layout from "./Layout";
 import Details from "../normal/Details";
 import ItemList from "../normal/ItemList.";
+// import Detail from "../normal/Detail";
 
 
 const Stack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ export default function AppNavigation() {
         <Stack.Screen name="Tabs" component={Tabs} options={{headerShown: false}}/>
         <Stack.Screen name="Layout" component={Layout} options={{headerShown: false}}/>
         <Stack.Screen name="Details" component={Details} options={{headerShown: false}}/>
+        {/* <Stack.Screen name="Detail" component={Detail} options={{headerShown: false}}/> */}
         <Stack.Screen name="ItemList" component={ItemList} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>

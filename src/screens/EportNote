@@ -14,7 +14,6 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 
-
 const Explore = () => {
   const navigation = useNavigation();
   const [showShadow, setShowShadow] = useState(false);
@@ -37,19 +36,6 @@ const Explore = () => {
       setShowShadow(false);
     }
   };
-
-  // const handleScroll = (event) => {
-  //   const contentHeight = event.nativeEvent.contentSize.height;
-  //   const visibleHeight = event.nativeEvent.layoutMeasurement.height;
-  //   const offsetY = event.nativeEvent.contentOffset.y;
-  //   const bottomThreshold = 100; // Adjust this value as needed
-
-  //   if (contentHeight - visibleHeight - offsetY < bottomThreshold) {
-  //     setShowShadow(true);
-  //   } else {
-  //     setShowShadow(false);
-  //   }
-  // };
 
   return (
     <SafeAreaView>
@@ -76,8 +62,7 @@ const Explore = () => {
       </View>
 
       <ScrollView
-      ref={scrollViewRef}
-        // className="bg-white"
+        ref={scrollViewRef}
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >
@@ -143,8 +128,9 @@ const Explore = () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <Pressable style={styles.card}
-              onPress={() => handlePress("Vegetables", item.id)}
+              <Pressable
+                style={styles.card}
+                onPress={() => handlePress("Vegetables", item.id)}
               >
                 <Image
                   source={item.uri}
@@ -155,10 +141,10 @@ const Explore = () => {
                     objectFit: "contain",
                   }}
                 />
-                <View style={{ width: "90%", bottom: 2 }}>
+                <View>
                   <Text style={styles.cardText1}>{item.name}</Text>
-                  <Text style={styles.cardText1}>{item.quantity}</Text>
-                  <Text style={styles.cardText1}>{item.price}</Text>
+                  <Text style={styles.cardText2}>{item.quantity}</Text>
+                  <Text style={styles.cardText3}>{item.price}</Text>
                   <View style={styles.iconContainer}>
                     <Text style={styles.icon}>+</Text>
                   </View>
@@ -185,8 +171,9 @@ const Explore = () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <Pressable style={styles.card}
-              onPress={() => handlePress("Fruits", item.id)}
+              <Pressable
+                style={styles.card}
+                onPress={() => handlePress("Fruits", item.id)}
               >
                 <Image
                   source={item.uri}
@@ -197,7 +184,7 @@ const Explore = () => {
                     objectFit: "contain",
                   }}
                 />
-                <View style={{ width: "90%", bottom: 2 }}>
+                <View>
                   <Text style={styles.cardText1}>{item.name}</Text>
                   <Text style={styles.cardText2}>{item.quantity}</Text>
                   <Text style={styles.cardText3}>{item.price}</Text>
@@ -213,20 +200,21 @@ const Explore = () => {
             <Text style={styles.containerText}>Dairy Products</Text>
             <Text
               style={styles.containerText2}
-              onPress={() => handleSeeAll("Dairy Products", imageData[7]["Dairy Products"][0].id)}
+              onPress={() => handleSeeAll("Dairy", imageData[7]["Dairy"][0].id)}
             >
               See All
             </Text>
           </View>
 
           <FlatList
-            data={imageData[7]["Dairy Products"]}
+            data={imageData[7]["Dairy"]}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <Pressable style={{ ...styles.card, marginBottom: 90 }}
-              onPress={() => handlePress("Dairy Products", item.id)}
+              <Pressable
+                style={{ ...styles.card, marginBottom: 90 }}
+                onPress={() => handlePress("Dairy", item.id)}
               >
                 <Image
                   source={item.uri}
@@ -237,7 +225,7 @@ const Explore = () => {
                     objectFit: "contain",
                   }}
                 />
-                <View style={{ width: 100 }}>
+                <View>
                   <Text style={styles.cardText1}>{item.name}</Text>
                   <Text style={styles.cardText2}>{item.quantity}</Text>
                   <Text style={styles.cardText3}>{item.price}</Text>
@@ -303,8 +291,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F2FCF4",
     elevation: 5,
     borderRadius: 10,
-    // marginRight: 14,
-    // marginBottom:5,
     margin: 8,
     justifyContent: "center",
     alignItems: "center",

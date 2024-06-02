@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ScrollView, Button } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity, Pressable } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -10,10 +10,10 @@ import { useNavigation } from "@react-navigation/native";
 const Details = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { category, itemId } = route.params;
+  const { category } = route.params;
 
   const items = imageData.find((data) => data[category])[category];
-  const selectedItem = items.find((item) => item.id === itemId);
+  // const selectedItem = items.find((item) => item.id === itemId);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#55AB60" }}>
@@ -30,58 +30,61 @@ const Details = () => {
       </View>
 
       <ScrollView style={styles.container}>
-      <View style={styles.containerInsideCard}>
-        <View style={styles.gridContainer}>
-          {items.map((item) => (
-            <View style={styles.card} key={item.id}>
-              <View style={styles.containerInside}>
-                <Image
-                  source={item.uri}
-                  style={{ width: 100, height: 80, objectFit: "contain" }}
-                />
-                <Image
-                  source={require("../images/icon/love.png")}
-                  style={styles.love}
-                />
-                <Text style={{paddingHorizontal:6}} numberOfLines={1}>{`${item.name} (${item.quantity})`}</Text>
-                <View style={styles.cardInsideIcon}>
-                  <Text
-                    style={{
-                      color: "#55AB60",
-                      fontWeight: "600",
-                      fontSize: 18,
-                    }}
-                  >
-                    {`${item.price}`}
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: 5,
-                    }}
-                  >
-                    <Icon
-                      name="remove-circle-outline"
-                      size={20}
-                      style={styles.minus}
-                    />
-                    <Text style={styles.increment}>1</Text>
+        <View style={styles.containerInsideCard}>
+          <View style={styles.gridContainer}>
+            {items.map((item) => (
+              <Pressable
+                key={item.id}
+                style={styles.card}
+                onPress={() => navigation.navigate('Details', { category, itemId: item.id })}
+              >
+                <View style={styles.containerInside}>
+                  <Image
+                    source={item.uri}
+                    style={{ width: 100, height: 80, objectFit: "contain" }}
+                  />
+                  <Image
+                    source={require("../images/icon/love.png")}
+                    style={styles.love}
+                  />
+                  <Text style={{ paddingHorizontal: 6 }} numberOfLines={1}>{`${item.name} (${item.quantity})`}</Text>
+                  <View style={styles.cardInsideIcon}>
+                    <Text
+                      style={{
+                        color: "#55AB60",
+                        fontWeight: "600",
+                        fontSize: 18,
+                      }}
+                    >
+                      {`${item.price}`}
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: 5,
+                      }}
+                    >
+                      <Icon
+                        name="remove-circle-outline"
+                        size={20}
+                        style={styles.minus}
+                      />
+                      <Text style={styles.increment}>1</Text>
 
-                    <Icon name="add-circle" size={20} style={styles.plus} />
+                      <Icon name="add-circle" size={20} style={styles.plus} />
+                    </View>
+                  </View>
+                  <View style={styles.content}>
+                    <Text style={styles.text1}>Subscribe</Text>
+                    <Text style={styles.text2}>Buy Once</Text>
                   </View>
                 </View>
-                <View style={styles.content}>
-                  <Text style={styles.text1}>Subscribe</Text>
-                  <Text style={styles.text2}>Buy Once</Text>
-                </View>
-              </View>
-
-            </View>
-          ))}
-        </View>
-              <Button title="Click" onPress={() => navigation.navigate('Details')}>Click</Button>
+              </Pressable>
+            ))}
+          </View>
+          {/* <Button title="Click" onPress={() => navigation.navigate('Details')}>Click</Button> */}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -107,14 +110,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#f2f0f0",
   },
 
-  containerInsideCard:{
-    marginTop:20,
-    marginBottom:50,
+  containerInsideCard: {
+    marginTop: 20,
+    marginBottom: 50,
     width: "100%",
-    justifyContent:'center',
+    justifyContent: 'center',
   },
   gridContainer: {
-    width:'88%',
+    width: '88%',
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
@@ -134,7 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
-    elevation:5
+    elevation: 5
   },
   cardInsideIcon: {
     width: "90%",

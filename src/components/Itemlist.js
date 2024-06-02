@@ -69,7 +69,7 @@ export const imageData = [
 },
 {   
     id: 8,
-    "Dairy":[
+    "Dairy Products":[
         { id: 1, name: "A2MATE milk",price:'$2',quantity:'0.5 ltr', uri: require("../images/milk.png") },
         { id: 2, name: "Amul Butter",price:'$2',quantity:'0.5 ltr', uri: require("../images/sofit.png") },
         { id: 4, name: "Sofit soya milk",price:'$2',quantity:'0.5 ltr', uri: require("../images/amul.png") },
