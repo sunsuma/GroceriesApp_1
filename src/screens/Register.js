@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+// import { SafeAreaView } from "react-native-safe-area-context";
 
 const Register = () => {
   const navigation = useNavigation(); // Initialize navigation
@@ -18,7 +18,7 @@ const Register = () => {
     <ScrollView>
       <StatusBar
         barStyle="light-content" // Use "dark-content" if you want light text on a dark background
-        backgroundColor="#00cc00"
+        backgroundColor="#55AB60"
       />
       <ScrollView style={{ left: 16 }}>
         <View style={{ alignSelf: "center" }}>

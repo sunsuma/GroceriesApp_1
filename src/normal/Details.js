@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
   FlatList,
   Pressable,
+  StatusBar
 } from "react-native";
 import React, { useRef } from "react";
-import { StatusBar } from "expo-status-bar";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { imageData } from "../components/Itemlist";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -32,20 +32,28 @@ const Detail = () => {
   const items = imageData.find((data) => data[category])[category];
   const selectedItem = items.find((item) => item.id === itemId);
 
+
   return (
     <SafeAreaView>
-      <StatusBar barStyle="light-content" backgroundColor="#55AB60" />
+      <StatusBar
+        barStyle="light-content" // Use "dark-content" if you want light text on a dark background
+        backgroundColor="#55AB60"
+      />
       <ScrollView ref={scrollViewRef} style={{marginTop:20}}>
         <View style={styles.headerContent}>
-          <View style={styles.IconContainer}>
+          <Pressable style={styles.IconContainer}
+          onPress={() => navigation.goBack()}
+          >
             <Icon
               name="chevron-back-outline"
               size={30}
-              onPress={() => navigation.goBack()}
+              // onPress={() => navigation.goBack()}
               color={'#fff'}
+              style={styles.Icon}
+
             />
-            <Text style={styles.text}>Details</Text>
-          </View>
+            <Text style={{...styles.text, marginLeft:5}}>Details</Text>
+          </Pressable>
         </View>
 
         <View style={styles.ImageContainer}>
@@ -137,14 +145,26 @@ export default Detail;
 
 const styles = StyleSheet.create({
   headerContent: {
+    // marginTop:5,
     width: "100%",
     height: 229,
     backgroundColor: "#55AB60",
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
+    // alignItems:'center',
+    // flexDirection:'row'
+  },
+  Icon:{
+    width: 40,
+    height:40,
+    borderRadius:100,
+    marginLeft:8,
+  },
+  IconHover:{
+    backgroundColor:'red',
   },
   IconContainer: {
-    marginTop: 40,
+    marginTop: 45,
     flexDirection: "row",
   },
   text: {

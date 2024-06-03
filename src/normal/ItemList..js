@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity, Pressable } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView,StatusBar, Button, TouchableOpacity, Pressable } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
-import { StatusBar } from "expo-status-bar";
 import { useRoute } from "@react-navigation/native";
 import { imageData } from "../components/Itemlist";
 import { useNavigation } from "@react-navigation/native";
@@ -17,17 +16,22 @@ const Details = () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: "#55AB60" }}>
-      <StatusBar barStyle="light-content" />
-      <View style={styles.header}>
+      <StatusBar
+        barStyle="light-content" // Use "dark-content" if you want light text on a dark background
+        backgroundColor="#55AB60"
+      />
+      <Pressable style={styles.header}
+      onPress={() => navigation.goBack()}
+      >
         <Icon
           name="chevron-back-outline"
           size={30}
-          onPress={() => navigation.goBack()}
+          color={'#fff'}
         />
-        <Text style={{ fontSize: 22, fontWeight: "700", marginBottom: 10 }}>
+        <Text style={{ fontSize: 22, fontWeight: "700", marginBottom: 10, color:'#fff' }}>
           {category}
         </Text>
-      </View>
+      </Pressable>
 
       <ScrollView style={styles.container}>
         <View style={styles.containerInsideCard}>
