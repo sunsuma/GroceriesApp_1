@@ -6,11 +6,11 @@ import {
   FlatList,
   TextInput,
   ScrollView,
+  StatusBar
 } from "react-native";
 import React, { useRef, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { imageData } from "../components/Itemlist";
-import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Explore from "./Explore";
 

@@ -267,7 +267,9 @@ const Cart = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.checkout}>
+        <TouchableOpacity style={styles.checkout}
+        onPress={()=>navigation.navigate('Payment')}
+        >
           <View style={styles.checkoutInside}>
             <Text style={styles.checkoutText}>Checkout</Text>
           </View>
