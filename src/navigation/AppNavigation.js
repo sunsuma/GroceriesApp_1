@@ -15,6 +15,12 @@ import Layout from "./Layout";
 import Details from "../normal/Details";
 import ItemList from "../normal/ItemList.";
 import Payment from "../screens/Payment";
+import Privacy_p from "../screens/Privacy_p";
+import Terms_c from "../screens/Terms_c";
+import Contact from "../screens/Contact";
+import FAQ from "../screens/FAQ";
+import MyAddress from "../screens/MyAddress";
+import MySubscription from "../screens/MySubscription";
 
 
 const Stack = createNativeStackNavigator();
@@ -35,6 +41,12 @@ export default function AppNavigation() {
         <Stack.Screen name="Details" component={Details} options={{headerShown: false}}/>
         <Stack.Screen name="ItemList" component={ItemList} options={{headerShown: false}}/>
         <Stack.Screen name="Payment" component={Payment} options={{headerShown: false}}/>
+        <Stack.Screen name="Privacy_p" component={Privacy_p} options={{headerShown: false}}/>
+        <Stack.Screen name="Terms_c" component={Terms_c} options={{headerShown: false}}/>
+        <Stack.Screen name="Contact" component={Contact} options={{headerShown: false}}/>
+        <Stack.Screen name="FAQ" component={FAQ} options={{headerShown: false}}/>
+        <Stack.Screen name="MyAddress" component={MyAddress} options={{headerShown: false}}/>
+        <Stack.Screen name="MySubscription" component={MySubscription} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

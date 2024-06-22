@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable, TouchableOpacity } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from "@react-navigation/native";
+
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -41,36 +42,50 @@ const Profile = () => {
           </View>
           <View style={styles.containerInside}>
             <Icon name="albums-outline" style={styles.icon} />
+            <TouchableOpacity onPress={()=>navigation.navigate('MySubscription')}>
             <Text style={styles.text2}>My Subscriptions</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.containerInside}>
             <Icon name="location-outline" style={styles.icon} />
+            <TouchableOpacity onPress={()=>navigation.navigate('MyAddress')}>
             <Text style={styles.text2}>My Addresses</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.containerInside}>
             <Icon name="chatbubbles-outline" style={styles.icon} />
+            <TouchableOpacity onPress={()=>navigation.navigate('FAQ')}>
             <Text style={styles.text2}>FAQ</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.containerInside}>
             <Image
               source={require("../../images/icon/headset.png")}
               style={{ ...styles.icon, width: 20, height: 20 }}
             />
+            <TouchableOpacity onPress={()=>navigation.navigate('Contact')}>
             <Text style={styles.text2}>Contact Us</Text>
+            </TouchableOpacity>
           </View>
+
           <View style={styles.containerInside}>
             <Image
               source={require("../../images/icon/About.png")}
               style={{ ...styles.icon, width: 20, height: 20 }}
             />
+            <TouchableOpacity onPress={()=>navigation.navigate('About')}>
             <Text style={styles.text2}>About</Text>
+            </TouchableOpacity>
           </View>
+
           <View style={styles.containerInside}>
             <Image
               source={require("../../images/icon/logout.png")}
               style={{ ...styles.icon, width: 20, height: 20 }}
             />
+            <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
             <Text style={styles.text2}>Log Out</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
