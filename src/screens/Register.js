@@ -7,6 +7,7 @@ import {
   ScrollView,
   StatusBar,
   StyleSheet,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -15,7 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 const Register = () => {
   const navigation = useNavigation(); // Initialize navigation
   return (
-    <ScrollView>
+    <SafeAreaView style={{flex:1}}>
       <StatusBar
         barStyle="light-content" // Use "dark-content" if you want light text on a dark background
         backgroundColor="#55AB60"
@@ -24,14 +25,14 @@ const Register = () => {
         <View style={{ alignSelf: "center" }}>
           <Image
             source={require("../../assets/Logo.png")}
-            style={{ width: 245, height: 60, top: 50 }}
+            style={{ width: 245, height: 60, margin:20 }}
             alt="logo"
           />
         </View>
         <Text
           style={{
             ...styles.text,
-            marginTop: 50,
+            marginTop: 20,
             fontSize: 24,
             fontWeight: 600,
             color: "#55AB60",
@@ -125,7 +126,7 @@ const Register = () => {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "row",
-              marginBottom: 20,
+              margin: 20,
             }}
           >
             <View style={styles.line} />
@@ -194,7 +195,7 @@ const Register = () => {
           </Text>
         </View>
       </ScrollView>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 

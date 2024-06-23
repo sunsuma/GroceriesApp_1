@@ -8,6 +8,7 @@ import {
   ScrollView,
   FlatList,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -237,17 +238,19 @@ const Payment = () => {
                 marginTop: 20,
               }}
             >
-              <Text
-                style={{
-                  alignSelf: "center",
-                  padding: 10,
-                  color: "#fff",
-                  fontSize: 18,
-                  fontWeight: "600",
-                }}
-              >
-                Apply Now
-              </Text>
+              <TouchableOpacity>
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    padding: 10,
+                    color: "#fff",
+                    fontSize: 18,
+                    fontWeight: "600",
+                  }}
+                >
+                  Apply Now
+                </Text>
+              </TouchableOpacity>
             </View>
 
             <View>
@@ -303,9 +306,9 @@ const Payment = () => {
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                   keyExtractor={(item) => item.id.toString()}
-                  renderItem={({ item }) => {
+                  renderItem={({ item, index }) => {
                     return (
-                      <View style={styles.card}>
+                      <View style={styles.card} key={index}>
                         <Image source={item.Img} style={styles.cardImage} />
                       </View>
                     );
@@ -313,16 +316,42 @@ const Payment = () => {
                 />
               </View>
 
-              <View style={{flexDirection:'row', gap:10, width:'100%', height:42,backgroundColor:'#55AB60',alignItems:'center',borderRadius:10, marginTop:20}}>
-                <Text style={{fontSize:20, fontWeight:'400', color:'#fff',marginLeft:16}}>Enter CVV</Text>
-                <Text style={{width:201,height:34,fontSize:20, fontWeight:'400', color:'#BCBCBC',marginLeft:16, backgroundColor:'#FFFFFF',borderRadius:8, paddingHorizontal:16}}>e.g. 123</Text>
+              <View style={styles.cvvContainer}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "400",
+                    color: "#fff",
+                    marginLeft: 16,
+                  }}
+                >
+                  Enter CVV
+                </Text>
+                <TextInput
+                  style={styles.cvvInput}
+                  keyboardType="numeric"
+                  placeholder="e.g. 123"
+                  maxLength={3}
+                />
               </View>
 
-              <View style={{justifyContent:'center', alignItems:'center', marginTop:20}}>
-              <Text style={{ width:150,height:50,backgroundColor:'#55AB60', fontSize:18, fontWeight:'600', color:'#fff', textAlign:'center', borderRadius:10,verticalAlign:'middle'}}>Pay $9.97</Text>
-              </View> 
+              <TouchableOpacity style={styles.paybtnContainer}>
+                <Text style={styles.paybtn}>Pay $9.97</Text>
+              </TouchableOpacity>
 
-              <Text style={{fontSize:14, fontWeight:'400', top:16, marginBottom:98}}>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <Text style={{color:'#55AB60'}}>privacy policy</Text>.</Text>   
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: "400",
+                  top: 16,
+                  marginBottom: 50,
+                }}
+              >
+                Your personal data will be used to process your order, support
+                your experience throughout this website, and for other purposes
+                described in our{" "}
+                <Text style={{ color: "#55AB60" }}>privacy policy</Text>.
+              </Text>
             </View>
           </View>
         </View>
@@ -338,6 +367,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     backgroundColor: "#55AB60",
+    marginLeft: 16,
+    gap: 8,
+    marginTop: 10,
   },
   headerText: {
     fontSize: 22,
@@ -479,15 +511,49 @@ const styles = StyleSheet.create({
     // backgroundColor:'red'
   },
   card: {
-    width: "100%",
     height: 151,
     marginBottom: 90,
-    // backgroundColor:'red'
   },
 
   cardImage: {
     width: 350,
     height: 300,
     objectFit: "contain",
+  },
+  cvvContainer: {
+    flexDirection: "row",
+    width: "100%",
+    gap: 10,
+    height: 42,
+    backgroundColor: "#55AB60",
+    alignItems: "center",
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  cvvInput: {
+    width: 201,
+    height: 34,
+    fontSize: 20,
+    fontWeight: "400",
+    color: "#BCBCBC",
+    marginLeft: 16,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 8,
+    paddingHorizontal: 16,
+  },
+  paybtnContainer: {
+    width: 150,
+    height: 50,
+    backgroundColor: "#55AB60",
+    borderRadius: 10,
+    alignSelf: "center",
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  paybtn: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#fff",
   },
 });

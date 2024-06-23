@@ -21,6 +21,7 @@ import Contact from "../screens/Contact";
 import FAQ from "../screens/FAQ";
 import MyAddress from "../screens/MyAddress";
 import MySubscription from "../screens/MySubscription";
+import Myorder from "../screens/Myorder";
 
 
 const Stack = createNativeStackNavigator();
@@ -47,6 +48,7 @@ export default function AppNavigation() {
         <Stack.Screen name="FAQ" component={FAQ} options={{headerShown: false}}/>
         <Stack.Screen name="MyAddress" component={MyAddress} options={{headerShown: false}}/>
         <Stack.Screen name="MySubscription" component={MySubscription} options={{headerShown: false}}/>
+        <Stack.Screen name="Myorder" component={Myorder} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

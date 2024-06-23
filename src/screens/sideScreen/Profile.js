@@ -38,7 +38,9 @@ const Profile = () => {
         <View style={styles.container}>
           <View style={styles.containerInside}>
             <Icon name="reader-outline" style={styles.icon} />
+            <TouchableOpacity onPress={()=>navigation.navigate('Myorder')}>
             <Text style={styles.text2}>My orders</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.containerInside}>
             <Icon name="albums-outline" style={styles.icon} />
@@ -97,10 +99,11 @@ export default Profile;
 
 const styles = StyleSheet.create({
   header: {
-    // marginTop: 50,
+    marginTop: 20,
     width: 220,
     flexDirection: "row",
     left: 16,
+    gap:10
   },
   imageContainer: {
     marginTop: 10,

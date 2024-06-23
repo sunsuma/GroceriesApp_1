@@ -271,6 +271,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 10,
+    margin:10
   },
 
   // off 25%

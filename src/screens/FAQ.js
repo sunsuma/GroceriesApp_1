@@ -96,7 +96,7 @@ export default FAQ;
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 50,
+    marginTop: 30,
     flexDirection: "row",
     left: 16,
     paddingTop: 8,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     borderRadius:10,
     textAlignVertical:'top',
-    fontSize:14,
+    fontSize:18,
     fontWeight:'400',
     paddingLeft:16,
     paddingTop:10,

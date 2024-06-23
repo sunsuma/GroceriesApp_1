@@ -53,7 +53,7 @@ const Explore = () => {
 
   return (
     <SafeAreaView>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor="#55AB60" />
       <View style={[styles.header, showShadow && styles.headerShadow]}>
         <View style={styles.headerContent}>
           <Icon

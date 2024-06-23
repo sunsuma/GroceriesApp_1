@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
   View,
@@ -8,22 +7,26 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  StatusBar,
 } from "react-native";
 
 const Login = () => {
   const navigation = useNavigation(); // Initialize navigation
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#fff" />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#55AB60"
+      />
       <View style={{ alignSelf: "center" }}>
         <Image
           source={require("../../assets/Logo.png")}
-          style={{ width: 221, height: 53, top: 50, marginBottom: 80 }}
+          style={{ width: 221, height: 53,margin:20 }}
           alt="logo"
         />
         <Image
           source={require("../../assets/Illustrator.png")}
-          style={{ width: 157, height: 152 }}
+          style={{ width: 157, height: 152, alignSelf:'center' }}
           alt="illustrator"
         />
       </View>
