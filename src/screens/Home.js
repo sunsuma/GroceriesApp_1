@@ -6,7 +6,8 @@ import {
   FlatList,
   TextInput,
   ScrollView,
-  StatusBar
+  StatusBar,
+  Pressable,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -33,32 +34,25 @@ const Home = ({ navigation }) => {
       {/* <StatusBar barStyle="light" /> */}
       <SafeAreaView style={[showShadow && styles.headerShadow]}>
         <View style={styles.header}>
-          <View style={styles.imageContainer}>
-            <Image
-              source={{
-                uri: "https://img.freepik.com/free-photo/artist-white_1368-3546.jpg",
-              }}
-              style={styles.Image}
-            />
-          </View>
-          <Text style={{ left: 70, position: "absolute", top: 10 }}>
-            <Text style={{ fontSize: 20, fontWeight: "600" }}>David </Text>
-            {"\n"}@gmail.com
-          </Text>
+          <Pressable
+            style={styles.imageContainer}
+            onPress={() => navigation.navigate("Profilemain")}
+          >
+            <View style={styles.imageContainerInside}>
+              <Image
+                source={{
+                  uri: "https://img.freepik.com/free-photo/artist-white_1368-3546.jpg",
+                }}
+                style={styles.Image}
+              />
+            </View>
+            <Text style={styles.profileName}>David {'\n'}@gmail.com</Text>
+          </Pressable>
           {/* notification */}
           <Ionicons name="notifications-outline" size={30} />
-          <Text
-            style={{
-              color: "red",
-              position: "absolute",
-              right: 10,
-              top: 5,
-              fontWeight: "600",
-              alignSelf: "center",
-            }}
-          >
-            3
-          </Text>
+          <View style={styles.notification}>
+            <Text style={styles.notificationText}>3</Text>
+          </View>
         </View>
 
         <View style={styles.searchContainer}>
@@ -152,7 +146,7 @@ const Home = ({ navigation }) => {
         </View>
 
         {/* get 25% cashback */}
-        <View style={{ ...styles.Imagecontainer2, marginTop: 60}}>
+        <View style={{ ...styles.Imagecontainer2, marginTop: 60 }}>
           <Image
             source={require("../../assets/advertisement2.png")}
             style={{ ...styles.image, height: 190 }}
@@ -271,24 +265,47 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 10,
-    margin:10
+    margin: 10,
+  },
+  notification: {
+    position: "absolute",
+    width: 18,
+    height: 18,
+    backgroundColor: "red",
+    right: 5,
+    top: 10,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  notificationText: {
+    color: "#fff",
+    fontWeight: "600",
   },
 
   // off 25%
   imageContainer: {
+    width: 100,
+    flexDirection:'row',
+    gap:18
+  },
+  imageContainerInside: {
     width: 50,
     height: 50,
     borderRadius: 100,
     overflow: "hidden",
-    justifyContent: "flex-start",
     alignItems: "center",
-    elevation:5,
-    backgroundColor:'red'
+    elevation: 5,
   },
   Image: {
     width: 150,
     height: 100,
     objectFit: "contain",
+  },
+  profileName:{
+    top:5,
+    fontSize:16,
+    fontWeight:'400'
   },
   container: {
     width: 376,
@@ -322,20 +339,20 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "grey",
   },
-  Imagecontainer:{
+  Imagecontainer: {
     width: 360,
     left: 16,
     top: 10,
-    elevation:5,
-    borderRadius:20
+    elevation: 5,
+    borderRadius: 20,
   },
   // off-25%
   Imagecontainer2: {
     width: 360,
     left: 16,
     top: 10,
-    elevation:5,
-    borderRadius:20
+    elevation: 5,
+    borderRadius: 20,
   },
   image: {
     width: "100%",
@@ -361,7 +378,6 @@ const styles = StyleSheet.create({
   cardContent: {
     justifyContent: "space-between",
     flexDirection: "row",
-    
   },
   card: {
     top: 57,
@@ -370,8 +386,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F2FCF4",
     borderRadius: 10,
     marginRight: 14,
-    elevation:5,
-    margin:2
+    elevation: 5,
+    margin: 2,
   },
 
   // nthChild: {
@@ -382,7 +398,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 70,
     top: -35,
-    objectFit:'contain'
+    objectFit: "contain",
   },
   card2: {
     top: 19,
@@ -391,8 +407,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F2FCF4",
     borderRadius: 10,
     marginRight: 14,
-    elevation:2,
-    margin:2
+    elevation: 2,
+    margin: 2,
   },
 
   cardImage2: {
@@ -400,7 +416,7 @@ const styles = StyleSheet.create({
     height: 90,
     marginTop: 24,
     alignSelf: "center",
-    objectFit:'contain'
+    objectFit: "contain",
   },
 
   cardImage3: {
@@ -408,7 +424,7 @@ const styles = StyleSheet.create({
     height: 95,
     marginTop: 24,
     alignSelf: "center",
-    objectFit:'contain'
+    objectFit: "contain",
   },
 
   cardInsidecontent: {

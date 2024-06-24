@@ -6,11 +6,13 @@ import {
   SafeAreaView,
   ScrollView,
   Pressable,
+  TouchableOpacity
 } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import Checkbox from "../components/Checkbox";
+
 
 const MyAddress = () => {
   const navigation = useNavigation();
@@ -37,10 +39,12 @@ const MyAddress = () => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <View style={{flex:1,}}>
           <View style={styles.containerInside}>
-            <View style={styles.content}>
+          <TouchableOpacity onPress={()=>navigation.navigate('NewAddress')}>
+          <View style={styles.content}>
               <Icon name="add-circle-outline" size={30} color={"#55AB60"} />
               <Text style={styles.text}>Add New Address</Text>
             </View>
+          </TouchableOpacity>
           </View>
 
           {/* Address */}

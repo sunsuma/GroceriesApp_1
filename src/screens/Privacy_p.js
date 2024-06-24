@@ -102,7 +102,7 @@ export default Privacy_p;
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 30,
+    marginTop: 50,
     flexDirection: "row",
     left: 16,
     paddingTop: 8,
